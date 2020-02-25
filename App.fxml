@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="boardfx" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.msController">
+   <children>
+   	  <Label id="remainingBombs" fx:id="remainingBombs" alignment="CENTER_RIGHT" layoutX="71.0" layoutY="23.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="Label" textAlignment="RIGHT" textFill="#e50f0f">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
+      <Button id="reset" fx:id="reset" layoutX="286.0" layoutY="23.0" mnemonicParsing="false" onAction="#reset" onMouseClicked="#reset" prefHeight="26.0" prefWidth="26.0" text=":)" />
+      <Label id="time" fx:id="time" alignment="CENTER_RIGHT" layoutX="347.0" layoutY="23.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="Label" textAlignment="RIGHT" textFill="#e31010">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </Label>
+      <GridPane id="griden" fx:id="griden" layoutX="71.0" layoutY="79.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+          <ColumnConstraints fx:id="grid" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <Label id="remainingBombs" fx:id="message" alignment="CENTER" layoutX="210.0" layoutY="377.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="You can do it!" textAlignment="CENTER" textFill="#e50f0f">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
