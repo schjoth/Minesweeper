@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -191,7 +192,8 @@ public class msController {
 		label.setTextFill(color);
 		label.setMaxWidth(25.0);
 		label.setMaxHeight(25.0);
-		label.setTextAlignment(TextAlignment.CENTER); 
+		label.setTextAlignment(TextAlignment.CENTER);
+		label.setAlignment(Pos.CENTER);
 		label.setText(text);
 		griden.add(label, posX, posY);
 	}
@@ -299,11 +301,7 @@ public class msController {
 	
 	//Timer timer = new Timer(true);
 	//timer.schedule(new countTime(), 0, 5000);
-	
-	
-	
 }
-
 
 /* class countTime extends TimerTask {
 	@FXML Label time;

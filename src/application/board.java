@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class board {
 	private ArrayList<tile> tiles = new ArrayList<tile>();
-	private int chance = 12; // percent for a tile to be a bomb
+	private int chance = 15; // percent for a tile to be a bomb
 	private int sumOfBombs;
 	
 	public board(int columnCount, int rowCount) {

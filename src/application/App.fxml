@@ -58,7 +58,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label id="remainingBombs" fx:id="message" alignment="CENTER" layoutX="210.0" layoutY="377.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="You can do it!" textAlignment="CENTER" textFill="#e50f0f">
+      <Label fx:id="message" alignment="CENTER" layoutX="210.0" layoutY="377.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="You can do it!" textAlignment="CENTER" textFill="#e50f0f">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
