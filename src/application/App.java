@@ -1,4 +1,4 @@
-package app;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class App extends Application{
 	@Override
 	public void start(final Stage primaryStage) throws Exception {
 		primaryStage.setTitle("My Application");
-		primaryStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("App.fxml"))));
+		primaryStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("application.fxml"))));
 		primaryStage.show();
 	}
 

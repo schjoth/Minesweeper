@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="boardfx" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.msController">
+<AnchorPane fx:id="boardfx" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.msController">
    <children>
    	  <Label id="remainingBombs" fx:id="remainingBombs" alignment="CENTER_RIGHT" layoutX="71.0" layoutY="23.0" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: #AAAAAA;" text="Label" textAlignment="RIGHT" textFill="#e50f0f">
          <font>
