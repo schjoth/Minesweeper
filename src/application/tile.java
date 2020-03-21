@@ -18,7 +18,7 @@ class tile {
 		else {
 			this.isBomb = false;
 		}
-		
+		//System.out.println(number + " <= " + chance + " = " + (number <= chance));
 	}
 
 	public boolean isBomb() {
@@ -31,6 +31,10 @@ class tile {
 	
 	public void open() {
 		this.closed = false;
+	}
+	
+	public void close() {
+		this.closed = true;
 	}
 	
 	public void flag() {
@@ -47,4 +51,32 @@ class tile {
 //			this.text = text;
 //		}
 //	}
+	
+	@Override
+	public String toString() {
+		String text = "";
+		if (isBomb) {
+			text += "1";
+		}
+		else {
+			text += "0";
+		}
+		text += "-";
+		if(closed) {
+			text += "1";
+		}
+		else {
+			text += "0";
+		}
+		text += "-";
+		if (flagged) {
+			text += "1";
+		}
+		else {
+			text += "0";
+		}
+		
+		
+		return text;
+	}
 }

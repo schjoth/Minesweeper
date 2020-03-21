@@ -20,37 +20,56 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 
-public class msController {
+public class msController implements FileOperations{
 	@FXML Label remainingBombs;
 	@FXML Label time;
+	@FXML Button Save;
+	@FXML Button Load;
 	@FXML Button reset;
 	@FXML AnchorPane boardfx;
 	@FXML GridPane griden;
 	@FXML Label message;
 	
 	
+	
 	private board board; 
-	//private boolean begun = false;
-	//Timer timeline;
-	
-	
+	private stopWatch timer = null;
+	private boolean timerStarted = false;
+	private String filepath; //Path to the file where you want to save game state,
+	//will fail if not assigned value
+
 	@FXML void initialize() {
 		reset();
-		//timeline = new Timer();
 	}
-	
-	@FXML void load() {
-		countTime();
-	}
-	
 	
 	@FXML void reset(){
+		/*
+		 * if (timer != null) {
+			timer.stop();
+		}
+		*/
 		board = new board(griden.getColumnCount(), griden.getRowCount());
 		removeOldButtons();
 		addNewButtons();
 		checkRemainingBombs();
-		resetTime();
-		
+		//resetTime();
+	}
+	
+	private void resetTime() {
+		timer = new stopWatch(this);
+		timerStarted = false;
+		time.setText(Double.toString(0.0));
+	}
+	
+	private void resetMessage() {
+		if (reset.getText() != ":)") {
+			reset.setTextFill(Color.rgb(229, 15, 15));
+			reset.setText(":)");
+		}
+		if (message.getText() != "You can do it!") {
+			message.setTextFill(Color.rgb(229, 15, 15));
+			message.setText("You can do it!");
+		}
 	}
 	
 	private void removeOldButtons() {
@@ -75,7 +94,6 @@ public class msController {
 		}
 	}
 	
-	
 	private void checkRemainingBombs() {
 		int numberOfRemainingBombs = board.getSumOfBombs();
 		for (Node node : griden.getChildren()) {
@@ -88,29 +106,16 @@ public class msController {
 		remainingBombs.setText(Integer.toString(numberOfRemainingBombs));
 	}
 
-
-	private void resetTime() {
-		//timeline = new Timer();
-		//this.begun = false;
-		//countTime();
-		time.setText(Double.toString(0.0));
-	}
-	
 	
 	@FXML void handleClick(MouseEvent e) {
-		if (reset.getText() != ":)") {
-			reset.setTextFill(Color.rgb(229, 15, 15));
-			reset.setText(":)");
-		}
-		if (message.getText() != "You can do it!") {
-			message.setTextFill(Color.rgb(229, 15, 15));
-			message.setText("You can do it!");
-		}
+		resetMessage();
 		
-		/*if (! this.begun) {
-			this.begun = true;
-			this.timeline.schedule(task, 100);
-		}*/
+		/*
+		if (! timerStarted) {
+			timer.run();
+			timerStarted = true;
+		}
+		*/
 		
 		Node source = (Node) e.getSource();
 		int id = Integer.parseInt(source.getId());
@@ -146,7 +151,6 @@ public class msController {
 				int numberOfNearbyBombs = board.nearbyBombs(posX, posY, griden.getColumnCount(), griden.getRowCount());
 				if (numberOfNearbyBombs == 0) {
 					text = "";
-					//removeButton(id);
 					openNearbyTiles(posX, posY);
 				}
 				else {
@@ -240,48 +244,6 @@ public class msController {
 			return "";
 		}
 	}
-	
-	
-	private void count() {
-		double newTime = Double.parseDouble(time.getText()) + 0.1;
-		System.out.println(Double.toString(newTime));
-		time.setText(Double.toString(newTime));
-	};
-	
-	void countTime() {
-		System.out.println("kjørt");
-		while (true) {
-			try {
-				wait(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			count();
-		}
-	}
-	
-	
-	/*ArrayList<Integer> indexToPos(int index) {
-		ArrayList<Integer> coordinates = new ArrayList<Integer>(); 
-		System.out.println("\n\n" + index);
-		System.out.println(griden.getColumnCount());
-		
-		int posY = Math.floorDiv(index, (griden.getColumnCount() -1));
-		int posX = index % griden.getColumnCount();
-		
-		//System.out.println(posX);
-		//System.out.println(posY);
-		
-		coordinates.add(posX);
-		coordinates.add(posY);
-		return coordinates;
-	}
-	*/
-	
-	//ObservableList<Node> liste = griden.getChildren();
-	
-	
-	
 	private void defeat() {
 		String newText = "You hit a bomb! :(";
 		message.setTextFill(Color.BLACK);
@@ -297,18 +259,57 @@ public class msController {
 		reset.setText(":D");
 		reset();
 	}
-	
-	
-	//Timer timer = new Timer(true);
-	//timer.schedule(new countTime(), 0, 5000);
-}
 
-/* class countTime extends TimerTask {
-	@FXML Label time;
+	void updateTime(int number) {
+		time.setText(Integer.toString(number));
+	}
 	
-	public void run() {
-		double lastTime = Integer.parseInt(time.getText());
-		time.setText(Double.toString(lastTime + 0.1));
+	
+	@FXML void save() {
+		if(write(filepath, board.getBoard())) {
+			message.setText("Game saved");
+		}
+		else {
+			message.setText("Save Failed");
+		}
+	}
+	
+	@FXML void load() {
+		/*
+		 * if (timer != null) {
+			timer.stop();
+		}
+		*/
+		String loadedGame = read(filepath);
+		if(loadedGame != null) {
+			removeOldButtons();
+			board = new board(loadedGame);
+			addNewButtons();
+			updateBoard();
+			checkRemainingBombs();
+			message.setText("Loaded game without flags");
+		}
+		else {
+			message.setText("Could not load game");
+		}
+		//resetTime();
+	}
+
+	private void updateBoard() {
+		ArrayList<tile> tiles = board.getBoard();
+		for (int i = 0; i < tiles.size(); i++) {
+			if ( ! tiles.get(i).isClosed()) {
+				tiles.get(i).close();
+				int posY = i / griden.getColumnCount();
+				int posX = i % griden.getColumnCount();
+				openTile(posX, posY, i);
+			}
+			/*
+			else if (tiles.get(i).isFlagged()) {
+				
+			}
+			*/
+		}
 	}
 }
-*/
+
